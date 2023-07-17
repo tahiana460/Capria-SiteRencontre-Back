@@ -8,6 +8,7 @@ const app = express()
 const port = 3100
 
 const loginRouter=require('./routes/login');
+const listUsersRouter=require('./routes/users-list');
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -29,6 +30,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 app.use('/login',loginRouter);
+app.use("/users", listUsersRouter);
 
 // app.use('/suppliers', suppliersRouter);
 
