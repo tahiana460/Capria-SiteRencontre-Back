@@ -18,18 +18,24 @@ router.post('/', (req, res) => {
     let filtres=data.filtres
     var requete='SELECT * from user where id!='+id_user
     if(filtres.length>0){
-      if(filtres[0]!=''){
-        requete+=' and sexe="'+filtres[0]+'"'
-      }
-      if(filtres[1]!=''){
-        if(filtres[1]=='60'){
-          requete+=' and TIMESTAMPDIFF( year, dateDeNaissance, now( ) ) >='+60;
+      if(filtres[0]==1){
+        if(filtres[1]!=''){
+          requete+=' and sexe="'+filtres[1]+'"'
         }
-        else{
-          requete+=' and TIMESTAMPDIFF( year, dateDeNaissance, now( ) ) >='+filtres[1]
-          requete+=' and TIMESTAMPDIFF( year, dateDeNaissance, now( ) )<'+filtres[2]
+        if(filtres[2]!=''){
+          if(filtres[2]=='60'){
+            requete+=' and TIMESTAMPDIFF( year, dateDeNaissance, now( ) ) >='+60;
+          }
+          else{
+            requete+=' and TIMESTAMPDIFF( year, dateDeNaissance, now( ) ) >='+filtres[2]
+            requete+=' and TIMESTAMPDIFF( year, dateDeNaissance, now( ) )<'+filtres[3]
+          }
         }
-      }
+      }else{
+        if(filtres[1]!=''){
+          requete+=" and (LOWER(pseudo) like LOWER('%"+filtres[1]+"%') or LOWER(nom) like LOWER('%"+filtres[1]+"%') or LOWER(prenom) like LOWER('%"+filtres[1]+"%') )"
+        }
+      }    
     }    
     //console.log(requete)
     /*if(filtres[1]!=''){
