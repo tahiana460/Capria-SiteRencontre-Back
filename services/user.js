@@ -13,6 +13,11 @@ const getUser = async (req, res) => {
     res.json(user);
 }
 
+const getUserById = async (req, res) => {
+    const [user] = await pool.query("SELECT * FROM user WHERE id=?", [req.params.id]);
+    res.json(user);
+}
+
 const getUserByPseudo = async (req, res) => {
     const [user] = await pool.query("SELECT * FROM user WHERE pseudo=?", [req.params.pseudo]);
     res.json(user);
@@ -26,6 +31,7 @@ const getUserByEmail = async (req, res) => {
 module.exports = { 
     register,
     getUser,
+    getUserById,
     getUserByPseudo,
     getUserByEmail
 };
