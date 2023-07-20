@@ -28,10 +28,17 @@ const getUserByEmail = async (req, res) => {
     res.json(user);
 }
 
+const updateUserInformation = async (req, res) => {
+    let data = req.body;
+    await pool.query("UPDATE user SET nom=?, prenom=?, pseudo=?, sexe=?, dateDeNaissance=?, ville=?, nation=?, orientationSxl=? WHERE id=?", [data.name, data.firstname, data.pseudo, data.gender, data.dateOfBirth, data.city, data.nationality, data.sexualOrientation, req.params.id])
+    res.status(204).json({state: 'User updated successfully'});
+}
+
 module.exports = { 
     register,
     getUser,
     getUserById,
     getUserByPseudo,
-    getUserByEmail
+    getUserByEmail,
+    updateUserInformation
 };
