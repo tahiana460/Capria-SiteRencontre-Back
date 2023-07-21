@@ -3,6 +3,7 @@ const express = require('express')
 var path = require("path");
 var cors = require("cors");
 const bodyParser = require('body-parser');
+const socket = require('socket.io');
 
 const app = express()
 const port = 3100
@@ -39,8 +40,25 @@ app.use("/update-user", updateUserRouter);
 // app.use('/suppliers', suppliersRouter);
 
 //app
-app.listen(port, () => {
+const server=app.listen(port, () => {
   console.log(`App running on http://localhost:${port}`)
 })
+
+const io = socket(server,{
+  cors: {
+      origin: "*",
+      methods: ["GET", "POST"],
+      allowedHeaders: ["content-type"]
+    }
+});
+
+io.on('connection', socket => {
+  //console.log("socket=",socket.id);
+  socket.on('CLIENT_MSG', data => {
+      console.log("msg=",data);
+      io.emit('SERVER_MSG', data);
+  })
+});
+
 
 module.exports = app;
