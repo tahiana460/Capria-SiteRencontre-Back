@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
     connection.query(requete, (err, rows, fields) => {
         if (err) throw err
       
-        //console.log( rows)
+        //console.log( requete)
         /* GET users listing. */
         res.send(rows)
         //reponse=rows[0].solution

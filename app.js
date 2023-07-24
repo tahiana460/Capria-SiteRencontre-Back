@@ -67,24 +67,14 @@ io.on('connection', socket => {
       });
 
       connection.connect()
-      data.username=parseInt(data.username)
-      data.receiverId=parseInt(data.receiverId)
-      var requete="insert into messages(sender_id,receiver_id,message) values("+data.username+","+
-      data.receiverId+",'"+data.text+"')"
+      data.sender_id=parseInt(data.sender_id)
+      data.receiver_id=parseInt(data.receiver_id)
+      var requete="insert into messages(sender_id,receiver_id,message) values("+data.sender_id+","+
+      data.receiver_id+",'"+data.message+"')"
       connection.query(requete, (err, rows, fields) => {
         if (err) throw err
         //console.log(requete)
       })
-     /* var requete="SELECT * FROM messages WHERE (sender_id="+mon_id+" or receiver_id="+mon_id+
-      ") and (sender_id="+rec_id+" or receiver_id="+rec_id+") and message!='undefined' order by send_time"
-      connection.query(requete, (err, rows, fields) => {
-          if (err) throw err
-        
-          //console.log( rows)
-          res.send(rows)
-          //reponse=rows[0].solution
-          
-      })*/
       connection.end()
       io.emit('SERVER_MSG', data);
   })
