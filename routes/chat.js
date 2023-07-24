@@ -16,8 +16,8 @@ router.post('/', (req, res) => {
     //console.log(data)
     var mon_id=data.mon_id
     let rec_id=data.receiver_id
-    var requete="SELECT * FROM messages WHERE (sender_id="+mon_id+" or receiver_id="+mon_id+
-    ") and (sender_id="+rec_id+" or receiver_id="+rec_id+") and message!='undefined' order by send_time"
+    var requete="SELECT * FROM messages WHERE ((sender_id="+mon_id+" and receiver_id="+rec_id+
+    ") or (sender_id="+rec_id+" and receiver_id="+mon_id+")) and message!='undefined' order by send_time"
     connection.query(requete, (err, rows, fields) => {
         if (err) throw err
       

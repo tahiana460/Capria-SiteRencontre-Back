@@ -57,7 +57,7 @@ const io = socket(server,{
 io.on('connection', socket => {
   //console.log("socket=",socket.id);
   socket.on('CLIENT_MSG', data => {
-      console.log("msg=",data);
+      //console.log("msg=",data);
       const mysql = require('mysql')
       const connection = mysql.createConnection({
         host: 'localhost',
