@@ -12,6 +12,7 @@ const loginRouter=require('./routes/login');
 const listUsersRouter=require('./routes/users-list');
 const userRouter=require('./routes/users');
 const updateUserRouter=require('./routes/user-update');
+const chatRouter=require('./routes/chat');
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -36,6 +37,7 @@ app.use('/login',loginRouter);
 app.use('/users',userRouter);
 app.use("/userList", listUsersRouter);
 app.use("/update-user", updateUserRouter);
+app.use("/messages", chatRouter);
 
 // app.use('/suppliers', suppliersRouter);
 
@@ -56,6 +58,34 @@ io.on('connection', socket => {
   //console.log("socket=",socket.id);
   socket.on('CLIENT_MSG', data => {
       console.log("msg=",data);
+      const mysql = require('mysql')
+      const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: 'root',
+        database: 'site_rencontre'
+      });
+
+      connection.connect()
+      data.username=parseInt(data.username)
+      data.receiverId=parseInt(data.receiverId)
+      var requete="insert into messages(sender_id,receiver_id,message) values("+data.username+","+
+      data.receiverId+",'"+data.text+"')"
+      connection.query(requete, (err, rows, fields) => {
+        if (err) throw err
+        //console.log(requete)
+      })
+     /* var requete="SELECT * FROM messages WHERE (sender_id="+mon_id+" or receiver_id="+mon_id+
+      ") and (sender_id="+rec_id+" or receiver_id="+rec_id+") and message!='undefined' order by send_time"
+      connection.query(requete, (err, rows, fields) => {
+          if (err) throw err
+        
+          //console.log( rows)
+          res.send(rows)
+          //reponse=rows[0].solution
+          
+      })*/
+      connection.end()
       io.emit('SERVER_MSG', data);
   })
 });
