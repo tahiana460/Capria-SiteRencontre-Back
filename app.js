@@ -11,6 +11,7 @@ const loginRouter=require('./routes/login');
 const listUsersRouter=require('./routes/users-list');
 const userRouter=require('./routes/users');
 const updateUserRouter=require('./routes/user-update');
+const vuesRouter=require('./routes/vues');
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -35,6 +36,7 @@ app.use('/login',loginRouter);
 app.use('/users',userRouter);
 app.use("/userList", listUsersRouter);
 app.use("/update-user", updateUserRouter);
+app.use("/vues", vuesRouter);
 
 // app.use('/suppliers', suppliersRouter);
 
