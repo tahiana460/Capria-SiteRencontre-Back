@@ -7,14 +7,14 @@ const addView = async (req, res) => {
     res.status(201).json(result.insertId);
 }
 
-const getAllUsersView = async (req) => {
+const getAllUsersView = async (req, res) => {
     const [views] = await pool.query("SELECT * FROM vues WHERE visited_id=?", [req.params.userId]);
-    res.json(user);
+    res.json(views);
 }
 
-const getVisitors = async (req) => {
+const getVisitors = async (req, res) => {
     const [views] = await pool.query("SELECT * FROM vues v JOIN user u on v.visitor_id = u.id  WHERE v.visited_id=?", [req.params.userId]);
-    res.json(user);
+    res.json(views);
 }
 
 module.exports = { 
