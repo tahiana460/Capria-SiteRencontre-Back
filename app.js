@@ -13,6 +13,7 @@ const listUsersRouter=require('./routes/users-list');
 const userRouter=require('./routes/users');
 const updateUserRouter=require('./routes/user-update');
 const chatRouter=require('./routes/chat');
+const viewRouter=require('./routes/views');
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -38,6 +39,7 @@ app.use('/users',userRouter);
 app.use("/userList", listUsersRouter);
 app.use("/update-user", updateUserRouter);
 app.use("/messages", chatRouter);
+app.use("/views", viewRouter);
 
 // app.use('/suppliers', suppliersRouter);
 
