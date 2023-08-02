@@ -3,7 +3,7 @@ const { pool } = require('../database');
 const addView = async (req, res) => {
     let data = req.body;
 
-    const [result] = await pool.query(`INSERT INTO vues(visited_id, visitor_id, date_visite) VALUES (?, ?, ?)`, [data.visited_id, data.visitor_id, data.date_visite])
+    const [result] = await pool.query(`INSERT INTO vues(visited_id, visitor_id, date_visite) VALUES (?, ?, NOW())`, [data.visited_id, data.visitor_id])
     res.status(201).json(result.insertId);
 }
 
