@@ -15,6 +15,7 @@ const updateUserRouter=require('./routes/user-update');
 const vuesRouter=require('./routes/vues');
 const chatRouter=require('./routes/chat');
 const viewRouter=require('./routes/views');
+const subscriptionRouter=require('./routes/subscriptions');
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -42,6 +43,7 @@ app.use("/update-user", updateUserRouter);
 app.use("/vues", vuesRouter);
 app.use("/messages", chatRouter);
 app.use("/views", viewRouter);
+app.use("/subscription", subscriptionRouter);
 
 // app.use('/suppliers', suppliersRouter);
 
