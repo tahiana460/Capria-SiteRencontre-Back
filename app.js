@@ -88,7 +88,7 @@ io.on('connection',  socket => {
           //console.log(nbMsg)
           //console.log(limitMsg)
           //console.log(nbMsg>=limitMsg)
-          if(nbMsg<limitMsg){
+          if(nbMsg<limitMsg-1){
             var requete='insert into messages(sender_id,receiver_id,message) values('+data.sender_id+','+
             data.receiver_id+',"'+data.message+'")'
             connection.query(requete, (err, rows, fields) => {
@@ -96,9 +96,18 @@ io.on('connection',  socket => {
               // console.log(requete)
             })
             connection.end()
+          }else if(nbMsg==limitMsg-1){
+            var requete='insert into messages(sender_id,receiver_id,message) values('+data.sender_id+','+
+            data.receiver_id+',"'+data.message+'")'
+            connection.query(requete, (err, rows, fields) => {
+              if (err) throw err
+              // console.log(requete)
+            })
+            connection.end()
+            data.limite='limite atteinte'
           }else{
             data.erreur='limite message envoye'
-          }      
+          } 
           io.emit('SERVER_MSG', data);
         })
       
