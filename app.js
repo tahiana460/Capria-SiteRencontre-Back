@@ -8,6 +8,7 @@ const socket = require('socket.io');
 const app = express()
 const port = 3100
 
+const { pool } = require('./database');
 const loginRouter=require('./routes/login');
 const listUsersRouter=require('./routes/users-list');
 const userRouter=require('./routes/users');
@@ -60,7 +61,7 @@ const io = socket(server,{
     }
 });
 
-io.on('connection', socket => {
+io.on('connection',  socket => {
   //console.log("socket=",socket.id);
   socket.on('CLIENT_MSG', data => {
       // console.log("msg=",data);
@@ -75,14 +76,32 @@ io.on('connection', socket => {
       connection.connect()
       data.sender_id=parseInt(data.sender_id)
       data.receiver_id=parseInt(data.receiver_id)
-      var requete="insert into messages(sender_id,receiver_id,message) values("+data.sender_id+","+
-      data.receiver_id+",'"+data.message+"')"
-      connection.query(requete, (err, rows, fields) => {
-        if (err) throw err
-        // console.log(requete)
-      })
-      connection.end()
-      io.emit('SERVER_MSG', data);
+      data.date_debut=data.date_debut
+
+      //let data = req.body;
+
+      //const [result] = await pool.query(`select count(*) as nb from messages where sender_id=? and send_time>=?`, [data.sender_id, data.date_debut])
+      pool.query(`select count(*) as nb from messages where sender_id=? and send_time>=?`, [data.sender_id, data.date_debut])
+        .then(([result])=>{
+          const nbMsg=result[0].nb
+          const limitMsg=5
+          //console.log(nbMsg)
+          //console.log(limitMsg)
+          //console.log(nbMsg>=limitMsg)
+          if(nbMsg<limitMsg){
+            var requete='insert into messages(sender_id,receiver_id,message) values('+data.sender_id+','+
+            data.receiver_id+',"'+data.message+'")'
+            connection.query(requete, (err, rows, fields) => {
+              if (err) throw err
+              // console.log(requete)
+            })
+            connection.end()
+          }else{
+            data.erreur='limite message envoye'
+          }      
+          io.emit('SERVER_MSG', data);
+        })
+      
   })
 });
 
