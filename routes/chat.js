@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const {getNbMsgs}=require('../services/messages')
 
 
 const mysql = require('mysql')
@@ -28,6 +29,8 @@ router.post('/', (req, res) => {
         
     })
 })
+
+router.post('/nbMsg',getNbMsgs)
 
 
 
