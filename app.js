@@ -39,6 +39,9 @@ app.get('/', (req, res) => {
 })
 app.use('/login',loginRouter);
 app.use('/users',userRouter);
+// app.use('/fongany',(req, res) => {
+//   res.send('Aona pr amzay ary')
+// });
 app.use("/userList", listUsersRouter);
 app.use("/update-user", updateUserRouter);
 app.use("/vues", vuesRouter);
