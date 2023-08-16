@@ -16,7 +16,7 @@ router.post('/', (req, res) => {
     //console.log(data)
     var id_user=data.id
     let filtres=data.filtres
-    var requete='SELECT * from user where id!='+id_user
+    var requete='SELECT * from user where id!='+id_user+' AND estAdmin=0'
     if(filtres.length>0){
       if(filtres[0]==1){
         if(filtres[1]!=''){

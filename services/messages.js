@@ -7,6 +7,11 @@ const getNbMsgs = async (req, res) => {
     res.status(200).json(result);
 }
 
+const getLastMessage = async (req, res) => {
+    const [[message]] = await pool.query(`SELECT * FROM messages WHERE sender_id=? and receiver_id=? ORDER BY send_time DESC LIMIT 1`, [req.params.sender_id, req.params.receiver_id])
+    res.status(200).json(message)
+}
 module.exports = { 
-    getNbMsgs
+    getNbMsgs,
+    getLastMessage
 };

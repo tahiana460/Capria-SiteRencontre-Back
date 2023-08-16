@@ -33,11 +33,17 @@ const updateUserInformation = async (req, res) => {
     res.status(204).json({state: 'User updated successfully'});
 }
 
+const getAdmin = async (req, res) => {
+    const [admin] = await pool.query("SELECT * FROM user WHERE estAdmin=1");
+    res.json(admin);
+}
+
 module.exports = { 
     register,
     getUser,
     getUserById,
     getUserByPseudo,
     getUserByEmail,
-    updateUserInformation
+    updateUserInformation,
+    getAdmin
 };
