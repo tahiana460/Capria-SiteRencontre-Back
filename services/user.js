@@ -1,4 +1,5 @@
 const { pool } = require('../database');
+const nodemailer=require('nodemailer')
 
 const register = async (req, res) => {
     let data = req.body;
@@ -51,9 +52,45 @@ const updateUserInformation = async (req, res) => {
     res.status(204).json({state: 'User updated successfully'});
 }
 
+const updateUserMdp = async (req, res) => {
+    let data = req.body;
+    await pool.query("UPDATE user SET mdp=sha1(?)  WHERE id=?", [data.mdp,req.params.id])
+    const ress={status:204,ok:true};
+    res.json(ress);
+}
+
 const getAdmin = async (req, res) => {
     const [admin] = await pool.query("SELECT * FROM user WHERE estAdmin=1");
     res.json(admin);
+}
+
+const envoiMail = async (req,res) => {
+    let data=req.body
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'test.email.kolo@gmail.com',
+          pass: 'sqrzdnixdzmpwtlc'
+        }
+      });
+      const href='http://localhost:3000/forgot-password?step=2&mail='+data.mail
+      var mailOptions = {
+        from: 'test.email.kolo@gmail.com',
+        to: data.mail,
+        subject: 'Réinitialisation mot de passe',
+        text: '',
+        html: '<p>Cliquez sur le lien suivant pour réinitialiser votre mot de passe. Ignorez ce mail si ce n\'est pas vous.</p><a href="'+href+'" > Réinitialiser mon mot de passe </a>'
+      };
+
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+          res.send(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+            res.send('Email sent: ' + info.response);
+        }
+      }); 
 }
 
 module.exports = { 
@@ -63,5 +100,7 @@ module.exports = {
     getUserByPseudo,
     getUserByEmail,
     updateUserInformation,
-    getAdmin
+    getAdmin,
+    envoiMail,
+    updateUserMdp
 };
