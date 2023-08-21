@@ -84,7 +84,7 @@ io.on('connection',  socket => {
       //let data = req.body;
 
       //const [result] = await pool.query(`select count(*) as nb from messages where sender_id=? and send_time>=?`, [data.sender_id, data.date_debut])
-      pool.query(`select count(*) as nb from messages where sender_id=? and send_time>=?`, [data.sender_id, data.date_debut])
+      pool.query(`select count(*) as nb from messages where sender_id=? and send_time>=? AND receiver_id!=5`, [data.sender_id, data.date_debut])
         .then(([result])=>{
           const nbMsg=result[0].nb
           const limitMsg=5
