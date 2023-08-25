@@ -1,12 +1,14 @@
-var createError = require("http-errors");
+//var createError = require("http-errors");
 const express = require('express')
 var path = require("path");
 var cors = require("cors");
 const bodyParser = require('body-parser');
 const socket = require('socket.io');
+const fs=require('fs')
+const events=require('events')
 
 const app = express()
-const port = 3100
+const port =  3100
 
 const { pool } = require('./database');
 const loginRouter=require('./routes/login');
@@ -118,6 +120,8 @@ io.on('connection',  socket => {
       
   })
 });
+
+app.use(express.static(__dirname + '/public'));
 
 
 module.exports = app;
