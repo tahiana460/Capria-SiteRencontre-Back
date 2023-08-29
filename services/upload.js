@@ -33,7 +33,7 @@ const detect=async (req,res)=>{
         if(err) console.log(err)
         //console.log('FORM')
         //const file=files.image[0]
-        //console.log(file)
+        console.log(data)
         const uri='./public/models' 
         Promise.all([
             faceapi.nets.ssdMobilenetv1.loadFromDisk(uri), // load models from a specific patch
@@ -49,7 +49,7 @@ const detect=async (req,res)=>{
             faceapi.detectAllFaces(expandT, options)
                 .then((result)=>{
                     faceapi.tf.dispose([decodeT, expandT]); // dispose tensors to avoid memory leaks
-                    //console.log( result );
+                    console.log( result.length );
                     const nbFaces={nb:result.length }
                     res.status(201).json(nbFaces)
                     //res.sendStatus(200)
@@ -58,10 +58,27 @@ const detect=async (req,res)=>{
     });    
 }
 
+const uploadImage = async (req, res) => {
+    let data = req.body;
+
+    const [result] = await pool.query(`INSERT INTO images(id_user, url) VALUES (?, ? )`, [data.id, data.url])
+    //console.log(result)
+    const ress={insertId:result.insertId,status:201,ok:true};
+    //res.status(201).json(result.insertId);
+    res.json(ress)
+}
+
+const getImagesByIdUser = async (req, res) => {
+    const [user] = await pool.query("SELECT * FROM images WHERE id_user=?", [req.params.id]);
+    res.json(user);
+}
+
 
 
 
 module.exports = { 
     upload,
-    detect
+    detect,
+    uploadImage,
+    getImagesByIdUser
 };
