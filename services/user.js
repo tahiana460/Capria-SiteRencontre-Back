@@ -1,5 +1,6 @@
 const { pool } = require('../database');
 const nodemailer=require('nodemailer')
+const fetch = require("node-fetch");
 
 const register = async (req, res) => {
     let data = req.body;
@@ -32,19 +33,19 @@ const getUserByGoogle = async (req, res) => {
 }
 
 const getUserByEmail = async (req, res) => {
-    var [user] = await pool.query("SELECT * FROM user WHERE mail=?", [req.params.email]);    
+    var [user] = await pool.query("SELECT * FROM user WHERE mail=?", [req.params.email]);  
+    //console.log(req.params.email)  
     if(user.length==0){
         const options = {method: 'GET'};
-        const api_key='70b908491d62418884377fefd4deca8c';
+        //const api_key='70b908491d62418884377fefd4deca8c';
+        const api_key='92ce134c955e4b90e9121c2b678d8da71ce87709'
         const mail=req.params.email;
-        const url='https://emailvalidation.abstractapi.com/v1/?api_key='+api_key+'&email='+mail
+        //const url='https://emailvalidation.abstractapi.com/v1/?api_key='+api_key+'&email='+mail
+        const url='https://api.hunter.io/v2/email-verifier?email='+mail+'&api_key='+api_key
         const response=await fetch(url, options)
-        /*.then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));*/
         const resp=await response.json()
         //console.log(resp)
-        if(resp.deliverability!='DELIVERABLE'){
+        if(resp.data.result!='deliverable'){
             user={erreur:'e-mail non existance'}
         }
     }
