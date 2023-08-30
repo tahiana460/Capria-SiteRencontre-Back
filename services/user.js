@@ -26,6 +26,11 @@ const getUserByPseudo = async (req, res) => {
     res.json(user);
 }
 
+const getUserByGoogle = async (req, res) => {
+    const [user] = await pool.query("SELECT * FROM user WHERE google=?", [req.params.email]);
+    res.json(user);
+}
+
 const getUserByEmail = async (req, res) => {
     var [user] = await pool.query("SELECT * FROM user WHERE mail=?", [req.params.email]);    
     if(user.length==0){
@@ -93,6 +98,17 @@ const envoiMail = async (req,res) => {
       }); 
 }
 
+const addGoogleAccount = async (req, res) => {
+    let data = req.body;
+    await pool.query("UPDATE user SET google=?  WHERE id=?", [data.email,req.params.userId])
+    res.status(204).json({state: 'Account associated'});
+}
+
+const removeGoogleAccount = async (req, res) => {
+    await pool.query("UPDATE user SET google=NULL  WHERE id=?", [req.params.userId])
+    res.status(204).json({state: 'Account dissociated'});
+}
+
 module.exports = { 
     register,
     getUser,
@@ -102,5 +118,8 @@ module.exports = {
     updateUserInformation,
     getAdmin,
     envoiMail,
-    updateUserMdp
+    updateUserMdp,
+    getUserByGoogle,
+    addGoogleAccount,
+    removeGoogleAccount
 };
