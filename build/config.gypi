@@ -6,8 +6,8 @@
     "defines": [],
     "include_dirs": [],
     "libraries": [],
-    "msbuild_toolset": "v141",
-    "msvs_windows_target_platform_version": "10.0.17763.0"
+    "msbuild_toolset": "v143",
+    "msvs_windows_target_platform_version": "10.0.19041.0"
   },
   "variables": {
     "asan": 0,
@@ -359,18 +359,18 @@
     "v8_trace_maps": 0,
     "v8_use_siphash": 1,
     "want_separate_host_toolset": 0,
-    "nodedir": "C:\\Users\\i\\AppData\\Local\\node-gyp\\Cache\\17.9.1",
+    "nodedir": "C:\\Users\\ASPIRE\\AppData\\Local\\node-gyp\\Cache\\17.9.1",
     "standalone_static_library": 1,
-    "msbuild_path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin\\MSBuild.exe",
-    "cache": "C:\\Users\\i\\AppData\\Local\\npm-cache",
-    "globalconfig": "C:\\Users\\i\\AppData\\Roaming\\npm\\etc\\npmrc",
-    "global_prefix": "C:\\Users\\i\\AppData\\Roaming\\npm",
-    "init_module": "C:\\Users\\i\\.npm-init.js",
-    "local_prefix": "E:\\PROJET\\perso\\capria\\site-rencontre\\Capria-SiteRencontre-Back",
+    "msbuild_path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe",
+    "cache": "C:\\Users\\ASPIRE\\AppData\\Local\\npm-cache",
+    "globalconfig": "C:\\Program Files\\nodejs\\etc\\npmrc",
+    "global_prefix": "C:\\Program Files\\nodejs",
+    "init_module": "C:\\Users\\ASPIRE\\.npm-init.js",
+    "local_prefix": "E:\\Projet\\Capria\\Capria-SiteRencontre-Back",
     "metrics_registry": "https://registry.npmjs.org/",
-    "node_gyp": "C:\\Users\\i\\AppData\\Roaming\\npm\\node_modules\\npm\\node_modules\\node-gyp\\bin\\node-gyp.js",
-    "prefix": "C:\\Users\\i\\AppData\\Roaming\\npm",
-    "userconfig": "C:\\Users\\i\\.npmrc",
-    "user_agent": "npm/8.3.0 node/v17.9.1 win32 x64 workspaces/false"
+    "node_gyp": "C:\\Users\\ASPIRE\\AppData\\Roaming\\nvm\\v17.9.1\\node_modules\\npm\\node_modules\\node-gyp\\bin\\node-gyp.js",
+    "prefix": "C:\\Program Files\\nodejs",
+    "userconfig": "C:\\Users\\ASPIRE\\.npmrc",
+    "user_agent": "npm/8.11.0 node/v17.9.1 win32 x64 workspaces/false"
   }
 }
