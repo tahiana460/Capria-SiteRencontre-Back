@@ -118,9 +118,21 @@ io.on('connection',  socket => {
           io.emit('SERVER_MSG', data);
         })
       
-  })
-});
+  });
 
+   // 1 online
+  socket.on('client_connect', async (userId) => {
+      await pool.query("UPDATE user SET statut=1 WHERE id=?", [userId])
+      // console.log(userId);
+  });
+
+   // 0 offline
+  socket.on('client_disconnect', async (userId) => {
+      await pool.query("UPDATE user SET statut=0 WHERE id=?", [userId])
+      // console.log('eh iza iny',userId);
+    });
+});
+ 
 app.use(express.static(__dirname + '/public'));
 
 
