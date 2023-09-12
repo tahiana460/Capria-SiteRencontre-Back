@@ -131,7 +131,7 @@ io.on('connection',  socket => {
   socket.on('client_disconnect', async (userId) => {
       await pool.query("UPDATE user SET statut=0 WHERE id=?", [userId])
       // console.log('eh iza iny',userId);
-    });
+  });
 });
 app.use(express.static(__dirname + '/public'));
 
