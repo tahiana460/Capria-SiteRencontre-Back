@@ -20,6 +20,7 @@ const chatRouter=require('./routes/chat');
 const viewRouter=require('./routes/views');
 const subscriptionRouter=require('./routes/subscriptions');
 const uploadRouter=require('./routes/upload');
+const  {socketConnection}  =require('./services/chat')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -68,6 +69,7 @@ const io = socket(server,{
     }
 });
 
+socketConnection(io);
 io.on('connection',  socket => {
   //console.log("socket=",socket.id);
   socket.on('CLIENT_MSG', data => {
@@ -117,7 +119,6 @@ io.on('connection',  socket => {
           } 
           io.emit('SERVER_MSG', data);
         })
-      
   });
 
    // 1 online
@@ -132,7 +133,6 @@ io.on('connection',  socket => {
       // console.log('eh iza iny',userId);
     });
 });
- 
 app.use(express.static(__dirname + '/public'));
 
 
