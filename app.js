@@ -21,6 +21,7 @@ const viewRouter=require('./routes/views');
 const subscriptionRouter=require('./routes/subscriptions');
 const uploadRouter=require('./routes/upload');
 const  {socketConnection}  =require('./services/chat')
+const  {main}  =require('./routes/paiement')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -53,6 +54,7 @@ app.use("/messages", chatRouter);
 app.use("/views", viewRouter);
 app.use("/subscription", subscriptionRouter);
 app.use("/upload", uploadRouter);
+app.post("/paiement",main);
 
 // app.use('/suppliers', suppliersRouter);
 
