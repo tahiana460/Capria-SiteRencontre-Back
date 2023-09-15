@@ -71,9 +71,29 @@ const io = socket(server,{
     }
 });
 
+let onlineUsers = [];
+
+const addUser = (userId, socketId) => {
+    if (!onlineUsers.some((user) => user.userId === userId)) {  // if user is not added before
+      onlineUsers.push({ userId: userId, socketId: socketId });
+      // console.log("New user connected!", onlineUsers);
+    }
+}
+
+const removeUser = (socketId) => {
+    onlineUsers = onlineUsers.filter((user) => user.socketId !== socketId);
+    // console.log("User disconnected", onlineUsers);
+}
+
+const getUser = (userId) => {
+    return onlineUsers.find(user => user.userId === parseInt(userId));
+}
+
 socketConnection(io);
 io.on('connection',  socket => {
   //console.log("socket=",socket.id);
+  socket.join(socket.id);
+
   socket.on('CLIENT_MSG', data => {
       // console.log("msg=",data);
       const mysql = require('mysql')
@@ -125,17 +145,29 @@ io.on('connection',  socket => {
 
    // 1 online
   socket.on('client_connect', async (userId) => {
+      console.log(userId, ' here, socket ', socket.id);
+      addUser(userId, socket.id)
       await pool.query("UPDATE user SET statut=1 WHERE id=?", [userId])
       // console.log(userId);
+      io.emit('getOnlineUsers', onlineUsers);
+      // console.log(onlineUsers);
   });
 
    // 0 offline
   socket.on('client_disconnect', async (userId) => {
       await pool.query("UPDATE user SET statut=0 WHERE id=?", [userId])
-      // console.log('eh iza iny',userId);
+      removeUser(socket.id)
+      io.emit('getOnlineUsers', onlineUsers);
   });
+
+  socket.on('sendNotification', ({senderId, senderPseudo, receiverId, type}) => {
+      const receiver = getUser(receiverId);
+      console.log('Nisy notif iny', receiver.socketId);
+      // io.to(receiver.socketId).emit('getNotification' ,{senderId, senderPseudo, type});
+      socket.broadcast.to(receiver.socketId).emit('getNotification' ,{senderId, senderPseudo, type});
+      // io.emit('getNotification' ,{senderId, senderPseudo, type});
+  })
 });
 app.use(express.static(__dirname + '/public'));
-
 
 module.exports = app;
