@@ -74,14 +74,14 @@ const io = socket(server,{
 let onlineUsers = [];
 
 const addUser = (userId, socketId) => {
-    if (!onlineUsers.some((user) => user.userId === userId)) {  // if user is not added before
+    if (!onlineUsers.some((user) => user.userId === userId)) {
       onlineUsers.push({ userId: userId, socketId: socketId });
       // console.log("New user connected!", onlineUsers);
     }
 }
 
-const removeUser = (socketId) => {
-    onlineUsers = onlineUsers.filter((user) => user.socketId !== socketId);
+const removeUser = (userId) => {
+    onlineUsers = onlineUsers.filter((user) => user.userId !== userId);
     // console.log("User disconnected", onlineUsers);
 }
 
@@ -139,7 +139,10 @@ io.on('connection',  socket => {
           }else{
             data.erreur='limite message envoye'
           } 
-          io.emit('SERVER_MSG', data);
+          // io.emit('SERVER_MSG', data);
+          receiver = getUser(parseInt(data.receiver_id))
+          // console.log('receiver', receiver.socketId);
+          io.to(receiver.socketId).emit('SERVER_MSG', data);
         })
   });
 
@@ -150,13 +153,13 @@ io.on('connection',  socket => {
       await pool.query("UPDATE user SET statut=1 WHERE id=?", [userId])
       // console.log(userId);
       io.emit('getOnlineUsers', onlineUsers);
-      // console.log(onlineUsers);
+      // console.log('connect',onlineUsers);
   });
 
    // 0 offline
   socket.on('client_disconnect', async (userId) => {
       await pool.query("UPDATE user SET statut=0 WHERE id=?", [userId])
-      removeUser(socket.id)
+      removeUser(userId);
       io.emit('getOnlineUsers', onlineUsers);
   });
 
@@ -164,7 +167,7 @@ io.on('connection',  socket => {
       const receiver = getUser(receiverId);
       console.log('Nisy notif iny', receiver.socketId);
       // io.to(receiver.socketId).emit('getNotification' ,{senderId, senderPseudo, type});
-      socket.broadcast.to(receiver.socketId).emit('getNotification' ,{senderId, senderPseudo, type});
+      io.emit('getNotification' ,{senderId, senderPseudo, type});
       // io.emit('getNotification' ,{senderId, senderPseudo, type});
   })
 });
