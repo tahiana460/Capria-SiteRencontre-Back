@@ -145,7 +145,7 @@ io.on('connection',  socket => {
 
    // 1 online
   socket.on('client_connect', async (userId) => {
-      console.log(userId, ' here, socket ', socket.id);
+      // console.log(userId, ' here, socket ', socket.id);
       addUser(userId, socket.id)
       await pool.query("UPDATE user SET statut=1 WHERE id=?", [userId])
       // console.log(userId);
