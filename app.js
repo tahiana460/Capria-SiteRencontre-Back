@@ -7,8 +7,11 @@ const socket = require('socket.io');
 const fs=require('fs')
 const events=require('events')
 
+const dotenv = require("dotenv")
+dotenv.config()
+
 const app = express()
-const port =  3100
+const port =  process.env.MYSQL_PORT
 
 const { pool } = require('./database');
 const loginRouter=require('./routes/login');
