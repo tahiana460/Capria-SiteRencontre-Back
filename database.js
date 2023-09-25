@@ -4,7 +4,7 @@ const dotenv = require("dotenv")
 dotenv.config()
 
 const pool = mysql.createPool({
-    url: process.env.MYSQL_URL,
+    // url: process.env.MYSQL_URL,
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
@@ -14,7 +14,7 @@ const pool = mysql.createPool({
     //collation: 'utf8mb4_unicode_ci' 
 }).promise()
 
-// pool.query('set names "utf8mb4"')
+pool.query('set names "utf8mb4"')
 
 module.exports = { 
     pool
