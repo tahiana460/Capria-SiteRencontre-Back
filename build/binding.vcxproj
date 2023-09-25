@@ -11,19 +11,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9AF5741C-C58D-ABC5-90C9-8C84CE517D29}</ProjectGuid>
+    <ProjectGuid>{F65F16F8-3B6B-9D68-A0C1-6DAC93EE6A44}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>binding</RootNamespace>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
   <PropertyGroup Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>
   <PropertyGroup Label="Locals">
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
   <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props"/>
@@ -48,7 +48,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\include\node;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\src;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\openssl\config;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\openssl\openssl\include;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\uv\include;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\zlib;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\include\node;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\src;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\openssl\config;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\openssl\openssl\include;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\uv\include;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\zlib;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/Zc:__cplusplus -std:c++17 %(AdditionalOptions)</AdditionalOptions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <BufferSecurityCheck>true</BufferSecurityCheck>
@@ -72,7 +72,7 @@
       <AdditionalOptions>/LTCG:INCREMENTAL %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;DelayImp.lib;&quot;C:\\Users\\i\\AppData\\Local\\node-gyp\\Cache\\17.9.1\\x64\\node.lib&quot;</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;DelayImp.lib;&quot;C:\\Users\\ASPIRE\\AppData\\Local\\node-gyp\\Cache\\17.9.1\\x64\\node.lib&quot;</AdditionalDependencies>
       <AdditionalOptions>/LTCG:INCREMENTAL /ignore:4199 %(AdditionalOptions)</AdditionalOptions>
       <DelayLoadDLLs>node.exe;%(DelayLoadDLLs)</DelayLoadDLLs>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -84,13 +84,13 @@
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\include\node;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\src;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\openssl\config;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\openssl\openssl\include;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\uv\include;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\zlib;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\include\node;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\src;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\openssl\config;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\openssl\openssl\include;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\uv\include;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\zlib;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=binding;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;DEBUG;_DEBUG;V8_ENABLE_CHECKS;%(PreprocessorDefinitions);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\include\node;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\src;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\openssl\config;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\openssl\openssl\include;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\uv\include;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\zlib;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\include\node;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\src;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\openssl\config;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\openssl\openssl\include;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\uv\include;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\zlib;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/Zc:__cplusplus -std:c++17 %(AdditionalOptions)</AdditionalOptions>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
@@ -117,7 +117,7 @@
       <AdditionalOptions>/LTCG:INCREMENTAL %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;DelayImp.lib;&quot;C:\\Users\\i\\AppData\\Local\\node-gyp\\Cache\\17.9.1\\x64\\node.lib&quot;</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;DelayImp.lib;&quot;C:\\Users\\ASPIRE\\AppData\\Local\\node-gyp\\Cache\\17.9.1\\x64\\node.lib&quot;</AdditionalDependencies>
       <AdditionalOptions>/LTCG:INCREMENTAL /ignore:4199 %(AdditionalOptions)</AdditionalOptions>
       <DelayLoadDLLs>node.exe;%(DelayLoadDLLs)</DelayLoadDLLs>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -129,7 +129,7 @@
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\include\node;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\src;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\openssl\config;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\openssl\openssl\include;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\uv\include;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\zlib;C:\Users\i\AppData\Local\node-gyp\Cache\17.9.1\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\include\node;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\src;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\openssl\config;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\openssl\openssl\include;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\uv\include;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\zlib;C:\Users\ASPIRE\AppData\Local\node-gyp\Cache\17.9.1\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=binding;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;%(PreprocessorDefinitions);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemDefinitionGroup>
@@ -138,7 +138,7 @@
     <None Include="..\binding.gyp"/>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\i\AppData\Roaming\npm\node_modules\npm\node_modules\node-gyp\src\win_delay_load_hook.cc"/>
+    <ClCompile Include="C:\Users\ASPIRE\AppData\Roaming\nvm\v17.9.1\node_modules\node-gyp\src\win_delay_load_hook.cc"/>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
   <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets"/>

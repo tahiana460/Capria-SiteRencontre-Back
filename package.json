@@ -22,6 +22,7 @@
     "form-data": "^4.0.0",
     "formidable": "^3.5.0",
     "fs": "^0.0.1-security",
+    "light": "^2.0.0-alpha.26",
     "long": "^5.2.3",
     "lru-cache": "^10.0.1",
     "mvola": "^1.2.0",
@@ -29,6 +30,7 @@
     "mysql2": "^3.5.1",
     "node-fetch": "^2.7.0",
     "nodemailer": "^6.9.4",
+    "python3": "^0.0.1",
     "socket.io": "^4.7.1"
   },
   "devDependencies": {
