@@ -2,11 +2,13 @@
   "name": "capria-siterencontre-back",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www",
-    "dev": "npx nodemon app.js"
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "dev": "npx nodemon index.js",
+    "build": "netlify deploy --prod"
   },
   "author": "",
   "license": "ISC",
