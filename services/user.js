@@ -79,7 +79,7 @@ const envoiMail = async (req,res) => {
           pass: 'sqrzdnixdzmpwtlc'
         }
       });
-      const href='http://localhost:3000/forgot-password?step=2&mail='+data.mail
+      const href=process.env.APP_URL+'/forgot-password?step=2&mail='+data.mail
       var mailOptions = {
         from: 'test.email.kolo@gmail.com',
         to: data.mail,

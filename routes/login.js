@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 const mysql = require('mysql');
 
+const dotenv = require("dotenv")
+dotenv.config()
+
 router.post('/', (req, res) => {
     let data = req.body;
     //console.log(data);
@@ -16,10 +19,10 @@ router.post('/', (req, res) => {
         //console.log(erreur.erreur)
         mdp=data.mdp;
         const connection = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: 'root',
-            database: 'site_rencontre'
+            host: process.env.MYSQL_HOST,
+            user: process.env.MYSQL_USER,
+            password: process.env.MYSQL_PASSWORD,
+            database: process.env.MYSQL_DATABASE
         })
 
         connection.connect()
