@@ -11,7 +11,7 @@ const dotenv = require("dotenv")
 dotenv.config()
 
 const app = express()
-const port =  process.env.MYSQL_PORT
+const port =  process.env.APP_PORT
 
 const { pool } = require('./database');
 const loginRouter=require('./routes/login');
