@@ -43,6 +43,8 @@ router.post('/', (req, res) => {
     /*if(filtres[1]!=''){
       if(filtres[1])
     }*/
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
     connection.query(requete, (err, rows, fields) => {
         if (err) throw err
       
