@@ -43,6 +43,7 @@ app.use(function(req, res, next) {
 
 // routes config
 app.get('/', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.send('Hello World!')
 })
 app.use('/login',loginRouter);
