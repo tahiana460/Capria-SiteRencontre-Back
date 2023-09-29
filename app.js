@@ -29,7 +29,7 @@ const  {socketConnection}  =require('./services/chat')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.use(cors({ origin: false }));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -69,7 +69,7 @@ const server=app.listen(port, () => {
 
 const io = socket(server,{
   cors: {
-      origin: false,
+      origin: "*",
       methods: ["GET", "POST"],
       allowedHeaders: ["content-type"]
     }
