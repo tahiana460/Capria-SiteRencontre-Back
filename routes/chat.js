@@ -22,6 +22,9 @@ router.post('/', (req, res) => {
     let rec_id=data.receiver_id
     var requete="SELECT * FROM messages WHERE ((sender_id="+mon_id+" and receiver_id="+rec_id+
     ") or (sender_id="+rec_id+" and receiver_id="+mon_id+")) and message!='undefined' order by send_time"
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    
     connection.query(requete, (err, rows, fields) => {
         if (err) throw err
       

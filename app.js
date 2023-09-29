@@ -94,11 +94,9 @@ const getUser = (userId) => {
 
 socketConnection(io);
 io.on('connection',  socket => {
-  //console.log("socket=",socket.id);
   socket.join(socket.id);
 
   socket.on('CLIENT_MSG', data => {
-      // console.log("msg=",data);
       const mysql = require('mysql')
       const connection = mysql.createConnection({
         host: process.env.MYSQL_HOST,
