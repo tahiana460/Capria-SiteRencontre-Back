@@ -69,7 +69,7 @@ const server=app.listen(port, () => {
 
 const io = socket(server,{
   cors: {
-      origin: "*",
+      origin: false,
       methods: ["GET", "POST"],
       allowedHeaders: ["content-type"]
     }
