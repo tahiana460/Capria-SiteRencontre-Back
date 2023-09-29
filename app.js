@@ -98,10 +98,10 @@ const getUser = (userId) => {
 }
 
 socketConnection(io);
-io.on('connection',  socket => {
-  socket.join(socket.id);
+io.on('connection',  sockett => {
+  // socket.join(socket.id);
 
-  socket.on('CLIENT_MSG', data => {
+  sockett.on('CLIENT_MSG', data => {
       const mysql = require('mysql')
       const connection = mysql.createConnection({
         host: process.env.MYSQL_HOST,
@@ -153,7 +153,7 @@ io.on('connection',  socket => {
   });
 
    // 1 online
-  socket.on('client_connect', async (userId) => {
+  sockett.on('client_connect', async (userId) => {
       // console.log(userId, ' here, socket ', socket.id);
       addUser(userId, socket.id)
       await pool.query("UPDATE user SET statut=1 WHERE id=?", [userId])
@@ -163,13 +163,13 @@ io.on('connection',  socket => {
   });
 
    // 0 offline
-  socket.on('client_disconnect', async (userId) => {
+  sockett.on('client_disconnect', async (userId) => {
       await pool.query("UPDATE user SET statut=0 WHERE id=?", [userId])
       removeUser(userId);
       io.emit('getOnlineUsers', onlineUsers);
   });
 
-  socket.on('sendNotification', ({senderId, senderPseudo, receiverId, type}) => {
+  sockett.on('sendNotification', ({senderId, senderPseudo, receiverId, type}) => {
       const receiver = getUser(receiverId);
       console.log('Nisy notif iny', receiver.socketId);
       // io.to(receiver.socketId).emit('getNotification' ,{senderId, senderPseudo, type});
