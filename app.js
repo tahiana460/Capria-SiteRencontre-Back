@@ -68,11 +68,7 @@ const server=app.listen(port, () => {
 })
 
 const io = socket(server,{
-  cors: {
-      origin: "*",
-      methods: ["GET", "POST"],
-      allowedHeaders: ["content-type"]
-    }
+  cors: false
 });
 
 let onlineUsers = [];
