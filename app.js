@@ -41,6 +41,10 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(cors({
+  origin: "*"
+}));
+
 // routes config
 app.get('/', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -68,7 +72,11 @@ const server=app.listen(port, () => {
 })
 
 const io = socket(server,{
-  cors: false
+  cors: {
+      origin: "*",
+      methods: ["GET", "POST"],
+      allowedHeaders: ["content-type"]
+    }
 });
 
 let onlineUsers = [];
