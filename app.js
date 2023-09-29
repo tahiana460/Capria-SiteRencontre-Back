@@ -3,7 +3,6 @@ const express = require('express')
 var path = require("path");
 var cors = require("cors");
 const bodyParser = require('body-parser');
-const socket = require('socket.io');
 const fs=require('fs')
 const events=require('events')
 
@@ -12,6 +11,13 @@ dotenv.config()
 
 const app = express()
 const port =  process.env.APP_PORT
+
+const http = require('http').createServer(app)
+const socket = require('socket.io')(http, {
+  cors: {
+      origin: "*"
+  }
+});
 
 const { pool } = require('./database');
 const loginRouter=require('./routes/login');
