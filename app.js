@@ -13,11 +13,7 @@ const app = express()
 const port =  process.env.APP_PORT
 
 const http = require('http').createServer(app)
-const socket = require('socket.io')(http, {
-  cors: {
-      origin: "*"
-  }
-});
+const socket = require('socket.io');
 
 const { pool } = require('./database');
 const loginRouter=require('./routes/login');
@@ -73,15 +69,13 @@ app.use("/upload", uploadRouter);
 // app.use('/suppliers', suppliersRouter);
 
 //app
-const server=app.listen(port, () => {
+http.listen(port, () => {
   console.log(`App running on http://localhost:${port}`)
 })
 
-const io = socket(server,{
+const io = socket(http, {
   cors: {
-      origin: "https://main--shiny-zuccutto-aa70cd.netlify.app",
-      methods: ["GET", "POST"],
-      allowedHeaders: ["content-type"]
+      origin: "*",
     }
 });
 
