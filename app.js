@@ -3,6 +3,7 @@ const express = require('express')
 var path = require("path");
 var cors = require("cors");
 const bodyParser = require('body-parser');
+const socket = require('socket.io');
 const fs=require('fs')
 const events=require('events')
 
@@ -11,9 +12,6 @@ dotenv.config()
 
 const app = express()
 const port =  process.env.APP_PORT
-
-const http = require('http').createServer(app)
-const socket = require('socket.io');
 
 const { pool } = require('./database');
 const loginRouter=require('./routes/login');
@@ -69,13 +67,15 @@ app.use("/upload", uploadRouter);
 // app.use('/suppliers', suppliersRouter);
 
 //app
-http.listen(port, () => {
+const server=app.listen(port, () => {
   console.log(`App running on http://localhost:${port}`)
 })
 
-const io = socket(http, {
+const io = socket(server,{
   cors: {
       origin: "*",
+      methods: ["GET", "POST"],
+      allowedHeaders: ["content-type"]
     }
 });
 
@@ -98,10 +98,10 @@ const getUser = (userId) => {
 }
 
 socketConnection(io);
-io.on('connection',  sockett => {
-  // socket.join(socket.id);
+io.on('connection',  socket => {
+  socket.join(socket.id);
 
-  sockett.on('CLIENT_MSG', data => {
+  socket.on('CLIENT_MSG', data => {
       const mysql = require('mysql')
       const connection = mysql.createConnection({
         host: process.env.MYSQL_HOST,
@@ -153,7 +153,7 @@ io.on('connection',  sockett => {
   });
 
    // 1 online
-  sockett.on('client_connect', async (userId) => {
+  socket.on('client_connect', async (userId) => {
       // console.log(userId, ' here, socket ', socket.id);
       addUser(userId, socket.id)
       await pool.query("UPDATE user SET statut=1 WHERE id=?", [userId])
@@ -163,13 +163,13 @@ io.on('connection',  sockett => {
   });
 
    // 0 offline
-  sockett.on('client_disconnect', async (userId) => {
+  socket.on('client_disconnect', async (userId) => {
       await pool.query("UPDATE user SET statut=0 WHERE id=?", [userId])
       removeUser(userId);
       io.emit('getOnlineUsers', onlineUsers);
   });
 
-  sockett.on('sendNotification', ({senderId, senderPseudo, receiverId, type}) => {
+  socket.on('sendNotification', ({senderId, senderPseudo, receiverId, type}) => {
       const receiver = getUser(receiverId);
       console.log('Nisy notif iny', receiver.socketId);
       // io.to(receiver.socketId).emit('getNotification' ,{senderId, senderPseudo, type});
