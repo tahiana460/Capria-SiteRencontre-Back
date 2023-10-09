@@ -13,7 +13,7 @@ dotenv.config()
 const app = express()
 const port =  process.env.APP_PORT
 
-const wsserver = require('ws').Server;
+const wsserver = require('wss').Server;
 var s = new wsserver({ port: 5001 });
 
 const onlineUsers = new Map();
