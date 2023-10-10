@@ -13,57 +13,7 @@ dotenv.config()
 const app = express()
 const port =  process.env.APP_PORT
 
-const wsserver = require('ws').Server;
-var s = new wsserver({ port: 3100 });
 
-const onlineUsers = new Map();
-
-s.on('connection', function (ws) {
-    ws.on('message', function(message) {
-
-      try {
-        const mes = JSON.parse(message.toString('utf-8'));
-        
-        if (mes.key === 'user_info') {
-          // Handle user info
-          // console.log('Received user info with identifier:', mes.data.id);
-          onlineUsers.set(mes.data.id, ws);
-        } else if (mes.key === 'user_message') {
-          // Handle message
-          // console.log('Received a message:', mes.data.receiver_id);
-          pool.query(`INSERT INTO messages(sender_id, receiver_id, message) VALUES (?, ?, ?)`, [mes.data.sender_id, mes.data.receiver_id, mes.data.message]);
-
-          const targetClientId = mes.data.receiver_id;
-          const targetClient = onlineUsers.get(targetClientId);
-
-          if (targetClient) {
-            targetClient.send(JSON.stringify(mes.data));
-          } 
-          // else {
-          //   console.error(`Client with ID `+targetClientId+` offline.`);
-          // }
-        }
-
-      } catch (error) {
-        console.error('Error parsing JSON message:', error);
-      }
-
-      // console.log('Received : ', message.toString('utf-8'));
-      // console.log('Received : ', message.toString('utf-8'));
-
-      // s.clients.forEach(function e(client) {
-      //   client.send('ato anaty foreach : '+message);
-      // })
-      // ws.send('From server : '+message);
-    })
-
-    // ws.on('close', function () {
-    //     console.log(`Goodbye my friend :')`);
-    // })
-
-
-    // console.log(`Welcome guys`);
-})
 
 const { pool } = require('./database');
 const loginRouter=require('./routes/login');
@@ -121,6 +71,58 @@ app.use("/upload", uploadRouter);
 //app
 const server=app.listen(port, () => {
   console.log(`App running on http://localhost:${port}`)
+})
+
+const wsserver = require('ws').Server;
+var s = new wsserver({ port: 3100 });
+
+const onlineUsers = new Map();
+
+s.on('connection', function (ws) {
+    ws.on('message', function(message) {
+
+      try {
+        const mes = JSON.parse(message.toString('utf-8'));
+        
+        if (mes.key === 'user_info') {
+          // Handle user info
+          // console.log('Received user info with identifier:', mes.data.id);
+          onlineUsers.set(mes.data.id, ws);
+        } else if (mes.key === 'user_message') {
+          // Handle message
+          // console.log('Received a message:', mes.data.receiver_id);
+          pool.query(`INSERT INTO messages(sender_id, receiver_id, message) VALUES (?, ?, ?)`, [mes.data.sender_id, mes.data.receiver_id, mes.data.message]);
+
+          const targetClientId = mes.data.receiver_id;
+          const targetClient = onlineUsers.get(targetClientId);
+
+          if (targetClient) {
+            targetClient.send(JSON.stringify(mes.data));
+          } 
+          // else {
+          //   console.error(`Client with ID `+targetClientId+` offline.`);
+          // }
+        }
+
+      } catch (error) {
+        console.error('Error parsing JSON message:', error);
+      }
+
+      // console.log('Received : ', message.toString('utf-8'));
+      // console.log('Received : ', message.toString('utf-8'));
+
+      // s.clients.forEach(function e(client) {
+      //   client.send('ato anaty foreach : '+message);
+      // })
+      // ws.send('From server : '+message);
+    })
+
+    // ws.on('close', function () {
+    //     console.log(`Goodbye my friend :')`);
+    // })
+
+
+    // console.log(`Welcome guys`);
 })
 
 // const io = socket(server,{
