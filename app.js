@@ -14,7 +14,8 @@ const app = express()
 const port =  process.env.APP_PORT
 
 const wsserver = require('ws').Server;
-var s = new wsserver({ port: 443 });
+// var s = new wsserver({ port: 443 });
+var s = new wsserver();
 
 const onlineUsers = new Map();
 
