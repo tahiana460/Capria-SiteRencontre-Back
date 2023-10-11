@@ -9,6 +9,8 @@ const pool = mysql.createPool({
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
+    port: process.env.MYSQL_PORT,
+    // option: { `ssl`: False},
     //charset : 'UTF8MB4_UNICODE_CI'
     charset : 'utf8'
     //collation: 'utf8mb4_unicode_ci' 
